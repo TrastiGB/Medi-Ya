@@ -1,0 +1,77 @@
+.novedades {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    background-color: #f8f9fa;
+  
+    &__container {
+      max-width: 1200px;
+      width: 100%;
+      text-align: center;
+    }
+  
+    &__title {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+  
+    &__description {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+  
+    &__content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      justify-content: center;
+    }
+  
+    &__cajetilla {
+      display: flex;
+      justify-content: center;
+    }
+  
+    &__caja {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease-in-out;
+      width: 100%;
+      max-width: 350px;
+      cursor: pointer;
+  
+      &:hover {
+        transform: translateY(-5px);
+      }
+    }
+  
+    &__imagen {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+  
+    &__info {
+      padding: 1rem;
+    }
+  
+    &__nombre {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 0.5rem;
+    }
+  
+    &__descripcion {
+      font-size: 1rem;
+      color: #666;
+    }
+  }
+  
