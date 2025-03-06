@@ -33,12 +33,81 @@
         </div>
       </div>
     </div>
-  </template>
+</template>
   
-  <script setup lang="ts">
-  </script>
+<script setup lang="ts">
+</script>
   
-  <style scoped lang="scss">
-  @use '../assets/styles/pages/blog.scss' as *;
-  </style>
+<style scoped lang="scss">
+@use "@/assets/styles/_variables.scss" as *;
+@use "@/assets/styles/_mixins.scss" as *;
+
+.about {
+    @include flex-center(column);
+    height: auto;
+    padding: 64px 24px;
+    background-color: $background-color;
   
+    &__container {
+      background: $color-white;
+      padding: 48px;
+      border-radius: $border-radius;
+      @include box-shadow;
+      width: 100%;
+      max-width: 800px;
+      text-align: center;
+    }
+  
+    &__title {
+      font-size: $title-large;
+      margin-bottom: 16px;
+      color: $primary-color;
+    }
+  
+    &__description {
+      font-size: $text-large;
+      color: $color-text-dark;
+      margin-bottom: 32px;
+    }
+  
+    &__content {
+      text-align: left;
+    }
+  
+    &__section {
+      margin-bottom: 32px;
+    }
+  
+    &__subtitle {
+      font-size: $title-medium;
+      color: $primary-color;
+      margin-bottom: 8px;
+    }
+  
+    &__text {
+      font-size: $text-medium;
+      color: $color-text-light;
+    }
+  
+    &__list {
+      list-style: none;
+      padding: 0;
+    }
+  
+    &__item {
+      font-size: $text-medium;
+      color: $color-text-dark;
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 24px;
+  
+      &::before {
+        content: "✔";
+        position: absolute;
+        left: 0;
+        color: $primary-color;
+        font-weight: bold;
+      }
+    }
+}
+</style>

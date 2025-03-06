@@ -1,0 +1,48 @@
+@use "variables" as *;
+
+// Mixins generales para FARMED
+
+// Mixin para aplicar flexbox fácilmente
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// Mixin para botones estándar
+@mixin button-style($bg-color: $primary-color, $text-color: $color-white) {
+  background-color: $bg-color;
+  color: $text-color;
+  font-size: $text-medium;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: $border-radius;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background-color: darken($bg-color, 10%);
+  }
+}
+
+// Mixin para aplicar sombras estándar
+@mixin box-shadow {
+  box-shadow: $box-shadow;
+}
+
+// Mixin para imágenes responsivas
+@mixin responsive-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Mixin para textos truncados
+@mixin text-truncate($lines: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+}

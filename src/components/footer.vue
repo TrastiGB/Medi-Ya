@@ -15,6 +15,39 @@
   </script>
   
   <style scoped lang="scss">
-  @use '@/../../assets/styles/components/footer.scss' as *;
+@use "@/assets/styles/_variables.scss" as *;
+@use "@/assets/styles/_mixins.scss" as *;
+
+.footer {
+  background-color: $primary-color;
+  color: $color-white;
+  text-align: center;
+  padding: 20px 0;
+  width: 100%;
+  margin-top: auto;
+
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    @include flex-center(row, space-between, center);
+  }
+
+  nav {
+    display: flex;
+    gap: 15px;
+
+    a {
+      color: $color-white;
+      text-decoration: none;
+      font-size: $text-small;
+      transition: color 0.3s ease;
+
+      &:hover {
+        text-decoration: underline;
+        color: darken($color-white, 10%);
+      }
+    }
+  }
+}
   </style>
-  

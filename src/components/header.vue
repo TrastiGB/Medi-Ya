@@ -3,7 +3,7 @@
     <div class="container">
       <div class="logo">
         <router-link to="/" class="logo__link">
-          <img src="/src/assets/images/1.png" alt="VOLUNMED Logo" class="logo__image" />
+          <img src="/src/assets/images/1.png" alt="FARMED Logo" class="logo__image" />
           <div>
             <h1>FARMED</h1>
             <span>Somos farmacéuticos</span>
@@ -31,11 +31,87 @@
 </script>
 
 <style scoped lang="scss">
-@use '@/../../assets/styles/components/header.scss' as *;
+@use "@/assets/styles/_variables.scss" as *;
+@use "@/assets/styles/_mixins.scss" as *;
+
+.header {
+  background-color: $color-white;
+  padding: 15px 0;
+  @include box-shadow;
+
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    @include flex-center(row, space-between, center);
+  }
+
+  .logo {
+    @include flex-center(row, flex-start, center);
+    gap: 10px;
+
+    &__image {
+      width: 100px;
+      height: auto;
+    }
+
+    h1 {
+      font-size: $title-large;
+      font-weight: bold;
+      color: $color-text-dark;
+      margin: 0;
+    }
+
+    span {
+      font-size: $text-small;
+      color: $color-text-light;
+    }
+  }
+
+  .nav {
+    ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      padding: 0;
+      margin: 0;
+      flex-grow: 1;
+
+      li {
+        a {
+          text-decoration: none;
+          font-size: $text-medium;
+          color: $color-text-dark;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+
+  .actions {
+    @include flex-center(row, flex-start, center);
+    gap: 15px;
+
+    .login {
+      @include button-style($primary-color, $color-white);
+    }
+
+    .cart {
+      width: 30px;
+      height: 30px;
+      background-size: cover;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}
 
 .logo__link {
-  display: flex;
-  align-items: center;
+  @include flex-center(row, flex-start, center);
   text-decoration: none;
   color: inherit;
 }

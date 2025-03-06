@@ -6,25 +6,25 @@
         name="Medicamentos"
         icon="@/assets/icons/medicamentos.svg"
         link="/medicamentos"
-        bgColor="#A7D7C5"
+        bgColor="$secondary-color"
       />
       <categorycard 
         name="Higiene"
         icon="@/assets/icons/higiene.svg"
         link="/higiene"
-        bgColor="#A5C8D2"
+        bgColor="$background-color"
       />
       <categorycard 
         name="Cosmética"
         icon="@/assets/icons/cosmetica.svg"
         link="/cosmetica"
-        bgColor="#F5A9A9"
+        bgColor="$primary-color"
       />
       <categorycard 
         name="Nutrición y Dietética"
         icon="@/assets/icons/nutricion.svg"
         link="/nutricion"
-        bgColor="#E2C299"
+        bgColor="$color-border"
       />
     </div>
   </section>
@@ -72,5 +72,53 @@ import productcard from '@/components/productcard.vue';
 </script>
 
 <style scoped lang="scss">
-@use '../assets/styles/pages/home.scss' as *;
+@use "@/assets/styles/_variables.scss" as *;
+@use "@/assets/styles/_mixins.scss" as *;
+
+.categories, .store-info, .featured-products {
+    text-align: center;
+    padding: 30px 0;
+  
+    h2 {
+      font-size: $title-medium;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: $primary-color;
+    }
+}
+
+.category-list, .product-list {
+    @include flex-center(row, center, center);
+    gap: 20px;
+}
+
+.store-info {
+    background-color: $background-color;
+    padding: 40px 20px;
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    p {
+      font-size: $text-medium;
+      color: $color-text-light;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+}
+
+.featured-products {
+    background-color: $color-white;
+    padding: 40px 20px;
+
+    .product-list {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+}
 </style>

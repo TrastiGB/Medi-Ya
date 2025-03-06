@@ -18,22 +18,95 @@
         </div>
       </div>
     </div>
-  </template>
+</template>
   
-  <script setup lang="ts">
-  import { ref } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const novedades = ref([
+  { nombre: 'Producto 1', imagen: 'https://plus.unsplash.com/premium_photo-1672163163579-e5d4aedd26af?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVkaWNpbmFzfGVufDB8fDB8fHww', descripcion: 'Descripción del producto 1' },
+  { nombre: 'Producto 2', imagen: 'https://www.shutterstock.com/image-photo/variety-medicines-drugsmedicine-healthcare-concept-260nw-2505906047.jpg', descripcion: 'Descripción del producto 2' },
+  { nombre: 'Producto 3', imagen: 'https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/177B/production/_97211060_capture.jpg.webp', descripcion: 'Descripción del producto 3' },
+  { nombre: 'Producto 4', imagen: 'https://www.natruly.com/cdn/shop/collections/cremas.jpg?v=1712256467&width=3200', descripcion: 'Descripción del producto 4' },
+  { nombre: 'Producto 5', imagen: 'https://www.samparfums.es/blog/wp-content/uploads/2023/12/crema-aceite-locion-corporal.webp', descripcion: 'Descripción del producto 5' },
+  { nombre: 'Producto 6', imagen: 'https://info.mercadona.es/img-cont/es/cremas-de-manos-deliplus--mov.jpg', descripcion: 'Descripción del producto 6' }
+]);
+</script>
   
-  const novedades = ref([
-    { nombre: 'Producto 1', imagen: 'https://plus.unsplash.com/premium_photo-1672163163579-e5d4aedd26af?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVkaWNpbmFzfGVufDB8fDB8fHww', descripcion: 'Descripción del producto 1' },
-    { nombre: 'Producto 2', imagen: 'https://www.shutterstock.com/image-photo/variety-medicines-drugsmedicine-healthcare-concept-260nw-2505906047.jpg', descripcion: 'Descripción del producto 2' },
-    { nombre: 'Producto 3', imagen: 'https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/177B/production/_97211060_capture.jpg.webp', descripcion: 'Descripción del producto 3' },
-    { nombre: 'Producto 4', imagen: 'https://www.natruly.com/cdn/shop/collections/cremas.jpg?v=1712256467&width=3200', descripcion: 'Descripción del producto 4' },
-    { nombre: 'Producto 5', imagen: 'https://www.samparfums.es/blog/wp-content/uploads/2023/12/crema-aceite-locion-corporal.webp', descripcion: 'Descripción del producto 5' },
-    { nombre: 'Producto 6', imagen: 'https://info.mercadona.es/img-cont/es/cremas-de-manos-deliplus--mov.jpg', descripcion: 'Descripción del producto 6' }
-  ]);
-  </script>
+<style scoped lang="scss">
+@use "@/assets/styles/_variables.scss" as *;
+@use "@/assets/styles/_mixins.scss" as *;
+
+.novedades {
+    @include flex-center(column);
+    padding: 32px;
+    background-color: $background-color;
   
-  <style scoped lang="scss">
-  @use '../assets/styles/pages/novedades.scss' as *;
-  </style>
+    &__container {
+      max-width: 1200px;
+      width: 100%;
+      text-align: center;
+    }
   
+    &__title {
+      font-size: $title-large;
+      font-weight: bold;
+      margin-bottom: 16px;
+      color: $primary-color;
+    }
+  
+    &__description {
+      font-size: $text-large;
+      color: $color-text-light;
+      margin-bottom: 32px;
+    }
+  
+    &__content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+  
+    &__cajetilla {
+      display: flex;
+      justify-content: center;
+    }
+  
+    &__caja {
+      background: $color-white;
+      border-radius: $border-radius;
+      @include box-shadow;
+      overflow: hidden;
+      transition: transform 0.3s ease-in-out;
+      width: 100%;
+      max-width: 350px;
+      cursor: pointer;
+  
+      &:hover {
+        transform: translateY(-5px);
+      }
+    }
+  
+    &__imagen {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+  
+    &__info {
+      padding: 16px;
+    }
+  
+    &__nombre {
+      font-size: $title-small;
+      font-weight: bold;
+      color: $color-text-dark;
+      margin-bottom: 8px;
+    }
+  
+    &__descripcion {
+      font-size: $text-medium;
+      color: $color-text-light;
+    }
+}
+</style>

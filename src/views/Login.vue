@@ -1,4 +1,3 @@
-
 <template>
   <div class="login">
         <div class="login__container">
@@ -24,5 +23,78 @@
 </script>
 
 <style scoped lang="scss">
-@use '../assets/styles/pages/login.scss' as *;
+@use "@/assets/styles/_variables.scss" as *;
+@use "@/assets/styles/_mixins.scss" as *;
+
+.login {
+  @include flex-center;
+  width: 100%;
+  height: 100vh;
+  background-color: $background-color;
+
+  &__container {
+    width: 90%;
+    max-width: 400px;
+    background: $color-white;
+    padding: 32px;
+    border-radius: $border-radius;
+    @include box-shadow;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: $title-medium;
+    margin-bottom: 24px;
+    color: $primary-color;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  &__label {
+    font-size: $text-small;
+    margin-bottom: 8px;
+    text-align: left;
+    color: $color-text-light;
+  }
+
+  &__input {
+    padding: 12px;
+    border: 1px solid $color-border;
+    border-radius: $border-radius;
+    font-size: $text-medium;
+    transition: border 0.3s;
+
+    &:focus {
+      border-color: $primary-color;
+      outline: none;
+    }
+  }
+
+  &__button {
+    @include button-style;
+    padding: 12px;
+    font-size: $text-medium;
+  }
+
+  &__link {
+    margin-top: 16px;
+    display: block;
+    font-size: $text-medium;
+    color: $primary-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
 </style>
