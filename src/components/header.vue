@@ -3,9 +3,9 @@
     <div class="container">
       <div class="logo">
         <router-link to="/" class="logo__link">
-          <img src="/src/assets/images/1.png" alt="FARMED Logo" class="logo__image" />
+          <logocanvas />
           <div>
-            <h1>FARMED</h1>
+            <h1>MediYa</h1>
             <span>Somos farmacéuticos</span>
           </div>
         </router-link>
@@ -27,7 +27,8 @@
   </header>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import logocanvas from "@/components/logocanvas.vue";
 </script>
 
 <style scoped lang="scss">
@@ -50,9 +51,12 @@
     @include flex-center(row, flex-start, center);
     gap: 10px;
 
-    &__image {
-      width: 100px;
-      height: auto;
+    &__link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
     }
 
     h1 {
@@ -108,15 +112,5 @@
       cursor: pointer;
     }
   }
-}
-
-.logo__link {
-  @include flex-center(row, flex-start, center);
-  text-decoration: none;
-  color: inherit;
-}
-
-.logo__image {
-  cursor: pointer;
 }
 </style>

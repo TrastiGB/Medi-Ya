@@ -153,7 +153,7 @@ const products = ref([
 .meds-sort {
   display: flex;
   justify-content: flex-start;
-  margin-bottom: 16px;
+  margin-bottom: 16px;  
 }
 
 .meds-list {

@@ -4,28 +4,43 @@
     <div class="category-list">
       <categorycard 
         name="Medicamentos"
-        icon="@/assets/icons/medicamentos.svg"
         link="/medicamentos"
         bgColor="$secondary-color"
-      />
+      >
+        <template #icon>
+          <medicinebottle />
+        </template>
+      </categorycard>
+
       <categorycard 
         name="Higiene"
-        icon="@/assets/icons/higiene.svg"
         link="/higiene"
         bgColor="$background-color"
-      />
+      >
+        <template #icon>
+          <hygieneicon />
+        </template>
+      </categorycard>
+
       <categorycard 
         name="Cosmética"
-        icon="@/assets/icons/cosmetica.svg"
         link="/cosmetica"
         bgColor="$primary-color"
-      />
+      >
+        <template #icon>
+          <cosmeticicon />
+        </template>
+      </categorycard>
+
       <categorycard 
         name="Nutrición y Dietética"
-        icon="@/assets/icons/nutricion.svg"
         link="/nutricion"
         bgColor="$color-border"
-      />
+      >
+        <template #icon>
+          <nutritionicon />
+        </template>
+      </categorycard>
     </div>
   </section>
 
@@ -52,9 +67,9 @@
 
   <section class="store-info">
     <div class="container">
-      <h2>Sobre FARMED</h2>
+      <h2>Sobre MEDIYA</h2>
       <p>
-        En <strong>FARMED</strong> nos especializamos en ofrecer productos farmacéuticos de calidad, 
+        En <strong>MEDIYA</strong> nos especializamos en ofrecer productos farmacéuticos de calidad, 
         con un enfoque en el bienestar y la salud de nuestros clientes. Nuestro compromiso es 
         brindar la mejor atención y un servicio confiable para garantizar tu satisfacción.
       </p>
@@ -67,8 +82,12 @@
 </template>
 
 <script setup lang="ts">
-import categorycard from '../components/categorycard.vue';
+import categorycard from '@/components/categorycard.vue';
 import productcard from '@/components/productcard.vue';
+import medicinebottle from '@/components/medicinebottle.vue';
+import hygieneicon from '@/components/hygieneicon.vue';
+import cosmeticicon from '@/components/cosmeticicon.vue';
+import nutritionicon from '@/components/nutritionicon.vue';
 </script>
 
 <style scoped lang="scss">

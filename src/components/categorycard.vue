@@ -1,8 +1,10 @@
 <template>
   <div class="category-card">
     <router-link :to="link">
-      <div class="icon" :style="{ backgroundColor: bgColor }">
-        <img :src="icon" :alt="name" />
+      <div class="icon-container" :style="{ backgroundColor: bgColor }">
+        <slot name="icon">
+          <img v-if="icon" :src="icon" :alt="name" />
+        </slot>
       </div>
       <h3>{{ name }}</h3>
       <div class="underline"></div>
@@ -13,7 +15,7 @@
 <script setup lang="ts">
 defineProps<{ 
   name: string; 
-  icon: string; 
+  icon?: string;  
   link: string; 
   bgColor: string; 
 }>();
@@ -33,15 +35,15 @@ defineProps<{
     @include flex-center(column);
   }
 
-  .icon {
+  .icon-container {
     width: 60px;
     height: 60px;
     border-radius: 50%;
     @include flex-center;
 
-    img {
-      width: 28px;
-      height: 28px;
+    img, svg {
+      width: 40px;
+      height: 40px;
     }
   }
 
