@@ -2,9 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
-import Novedades from '../views/Novedades.vue';
 import Blog from '../views/Blog.vue'; 
 import Meds from '../views/Meds.vue';
+import Higiene from '../views/Higiene.vue';
+import Cosmetica from '../views/Cosmetica.vue';
+import Nutricion from '../views/Nutricion.vue';
 import Oportunidades from '../views/Oportunidades.vue';
 
 
@@ -14,7 +16,9 @@ const routes = [
   { path: '/register', component: Register, meta: { public: true } },
   { path: '/blog', component: Blog, meta: { public: true } },
   { path: '/medicamentos', component: Meds, meta: { public: true } },
-  { path: '/novedades', component: Novedades, meta: { public: true } },
+  { path: '/higiene', component: Higiene, meta: { public: true } },
+  { path: '/cosmetica', component: Cosmetica, meta: { public: true } },
+  { path: '/nutricion', component: Nutricion, meta: { public: true } },
   { path: '/oportunidades', component: Oportunidades, meta: { public: true } },
 
 ];
