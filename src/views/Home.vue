@@ -51,16 +51,37 @@
         name="Paracetamol 500mg"
         price="5.99€"
         image="@/assets/images/paracetamol.jpg"
+        class="product-card"
       />
       <productcard 
         name="Crema Hidratante"
         price="12.50€"
         image="@/assets/images/crema.jpg"
+        class="product-card"
       />
       <productcard 
         name="Vitaminas Complejo B"
         price="8.99€"
         image="@/assets/images/vitaminas.jpg"
+        class="product-card"
+      />
+      <productcard 
+        name="Paracetamol 500mg"
+        price="5.99€"
+        image="@/assets/images/paracetamol.jpg"
+        class="product-card"
+      />
+      <productcard 
+        name="Crema Hidratante"
+        price="12.50€"
+        image="@/assets/images/crema.jpg"
+        class="product-card"
+      />
+      <productcard 
+        name="Vitaminas Complejo B"
+        price="8.99€"
+        image="@/assets/images/vitaminas.jpg"
+        class="product-card"
       />
     </div>
   </section>
@@ -106,9 +127,48 @@ import nutritionicon from '@/components/nutritionicon.vue';
     }
 }
 
-.category-list, .product-list {
+.category-list {
     @include flex-center(row, center, center);
     gap: 20px;
+}
+
+.product-list {
+    display: grid;
+    grid-template-columns: 100%; // Mobile: una sola columna
+    grid-template-areas: 
+        "product1"
+        "product2"
+        "product3"
+        "product4"
+        "product5"
+        "product6";
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: center;
+
+    @media (min-width: 768px) { // Tablets: Dos columnas
+        grid-template-columns: 48% 48%;
+        grid-template-areas: 
+            "product1 product2"
+            "product3 product4"
+            "product5 product6";
+    }
+
+    @media (min-width: 1024px) { // Escritorio: Tres columnas
+        grid-template-columns: 30% 30% 30%;
+        grid-template-areas: 
+            "product1 product2 product3"
+            "product4 product5 product6";
+    }
+
+    .product-card:nth-child(1) { grid-area: product1; }
+    .product-card:nth-child(2) { grid-area: product2; }
+    .product-card:nth-child(3) { grid-area: product3; }
+    .product-card:nth-child(4) { grid-area: product4; }
+    .product-card:nth-child(5) { grid-area: product5; }
+    .product-card:nth-child(6) { grid-area: product6; }
 }
 
 .store-info {
@@ -132,12 +192,5 @@ import nutritionicon from '@/components/nutritionicon.vue';
 .featured-products {
     background-color: $color-white;
     padding: 40px 20px;
-
-    .product-list {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
 }
 </style>
