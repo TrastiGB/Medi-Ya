@@ -1,0 +1,35 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Mediya API",
+      "version": "1.0.0",
+      "description": "API para el servicio de delivery de farmacias"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:5000",
+        "description": "Servidor Local"
+      }
+    ],
+    "paths": {
+      "/": {
+        "get": {
+          "summary": "Prueba de conexión",
+          "description": "Verifica que el servidor esté funcionando",
+          "responses": {
+            "200": {
+              "description": "Servidor en línea",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "message": "Bienvenido a la API de MEDIYA"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
