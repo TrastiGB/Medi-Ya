@@ -1,35 +1,204 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "Mediya API",
-      "version": "1.0.0",
-      "description": "API para el servicio de delivery de farmacias"
-    },
-    "servers": [
-      {
-        "url": "http://localhost:5000",
-        "description": "Servidor Local"
-      }
-    ],
-    "paths": {
-      "/": {
-        "get": {
-          "summary": "Prueba de conexión",
-          "description": "Verifica que el servidor esté funcionando",
-          "responses": {
-            "200": {
-              "description": "Servidor en línea",
-              "content": {
-                "application/json": {
-                  "example": {
-                    "message": "Bienvenido a la API de MEDIYA"
-                  }
-                }
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Mediya API",
+    "version": "1.0.0",
+    "description": "API para el servicio de delivery de farmacias"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Servidor Local"
+    }
+  ],
+  "paths": {
+    "/api/usuarios": {
+      "get": {
+        "summary": "Obtener todos los usuarios",
+        "responses": {
+          "200": { "description": "Lista de usuarios" }
+        }
+      },
+      "post": {
+        "summary": "Crear un usuario",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": { "type": "string", "example": "Juan Pérez" },
+                  "email": { "type": "string", "example": "juan@example.com" },
+                  "password": { "type": "string", "example": "123456" }
+                },
+                "required": ["nombre", "email", "password"]
               }
             }
           }
+        },
+        "responses": {
+          "201": { "description": "Usuario creado exitosamente" },
+          "400": { "description": "Error: Todos los campos son obligatorios" },
+          "409": { "description": "Error: El correo electrónico ya está registrado" }
+        }
+      }
+    },
+    "/api/usuarios/{id}": {
+      "get": {
+        "summary": "Obtener un usuario por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Detalles del usuario" },
+          "404": { "description": "Usuario no encontrado" }
+        }
+      },
+      "put": {
+        "summary": "Actualizar un usuario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Usuario actualizado correctamente" }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar un usuario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Usuario eliminado correctamente" }
+        }
+      }
+    },
+    "/api/productos": {
+      "get": {
+        "summary": "Obtener todos los productos",
+        "responses": {
+          "200": { "description": "Lista de productos" }
+        }
+      },
+      "post": {
+        "summary": "Crear un producto",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": { "type": "string", "example": "Paracetamol" },
+                  "descripcion": { "type": "string", "example": "Analgésico y antipirético" },
+                  "precio": { "type": "number", "example": 4.99 },
+                  "categoria": { "type": "string", "example": "Medicamento" }
+                },
+                "required": ["nombre", "precio", "categoria"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Producto creado exitosamente" },
+          "400": { "description": "Error: Todos los campos son obligatorios" }
+        }
+      }
+    },
+    "/api/productos/{id}": {
+      "get": {
+        "summary": "Obtener un producto por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Detalles del producto" },
+          "404": { "description": "Producto no encontrado" }
+        }
+      },
+      "put": {
+        "summary": "Actualizar un producto",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Producto actualizado correctamente" }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar un producto",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Producto eliminado correctamente" }
+        }
+      }
+    },
+    "/api/pedidos": {
+      "get": {
+        "summary": "Obtener todos los pedidos",
+        "responses": {
+          "200": { "description": "Lista de pedidos" }
+        }
+      },
+      "post": {
+        "summary": "Crear un pedido",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "usuario_id": { "type": "integer", "example": 1 },
+                  "producto_id": { "type": "integer", "example": 2 },
+                  "cantidad": { "type": "integer", "example": 3 },
+                  "precio_unitario": { "type": "number", "example": 10.50 },
+                  "total": { "type": "number", "example": 31.50 },
+                  "direccion_entrega": { "type": "string", "example": "Calle 123, Ciudad" }
+                },
+                "required": ["usuario_id", "producto_id", "cantidad", "precio_unitario", "total", "direccion_entrega"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Pedido creado exitosamente" },
+          "400": { "description": "Error: Todos los campos son obligatorios" }
         }
       }
     }
   }
-  
+}
