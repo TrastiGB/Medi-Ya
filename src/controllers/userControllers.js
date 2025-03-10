@@ -31,8 +31,8 @@ const getUserById = async (req, res) => {
 // Crear usuario
 const createUser = async (req, res) => {
   try {
-    const { nombre, email, password, tipo } = req.body;
-    if (!nombre || !email || !password)
+    const { nombre, email, password, type } = req.body;
+    if (!nombre || !email || !password || !type)
       return res.status(400).json({ error: "Todos los campos son obligatorios" });
 
     const existingUser = await User.findOne({ where: { email } });
@@ -42,7 +42,7 @@ const createUser = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const newUser = await User.create({ nombre, email, password: hashedPassword, tipo });
+    const newUser = await User.create({ nombre, email, password: hashedPassword, type });
 
     res.status(201).json({ message: "Usuario creado exitosamente", user: newUser });
   } catch (error) {
@@ -55,11 +55,11 @@ const createUser = async (req, res) => {
 // Actualizar usuario
 const updateUser = async (req, res) => {
   try {
-    const { nombre, email, tipo } = req.body;
+    const { nombre, email, type } = req.body;
     const user = await User.findByPk(req.params.id);
     if (!user) return res.status(404).json({ error: "Usuario no encontrado" });
 
-    await user.update({ nombre, email, tipo });
+    await user.update({ nombre, email, type });
     res.json({ message: "Usuario actualizado correctamente", user });
   } catch (error) {
     console.error("Error al actualizar usuario:", error);
@@ -93,8 +93,8 @@ const loginUser = async (req, res) => {
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) return res.status(401).json({ error: "Contraseña incorrecta" });
 
-      // **Guardar usuario en la sesión con su tipo**
-      req.session.user = { id: user.id, email: user.email, tipo: user.tipo };
+      // **Guardar usuario en la sesión con su type**
+      req.session.user = { id: user.id, email: user.email, type: user.type };
 
       res.json({ message: "Inicio de sesión exitoso", user: req.session.user });
   } catch (error) {

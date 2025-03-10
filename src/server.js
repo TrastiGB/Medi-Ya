@@ -40,7 +40,7 @@ connectDB();
 
 // **Sincronizar modelos con la base de datos y cargar productos de prueba**
 sequelize
-  .sync({ force: false }) // No resetear la base de datos
+  .sync({ force: true }) // No resetear la base de datos
   .then(async () => {
     console.log("✅ Base de datos sincronizada.");
 

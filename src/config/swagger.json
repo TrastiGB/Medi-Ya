@@ -28,11 +28,12 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nombre": { "type": "string", "example": "Juan Pérez" },
-                  "email": { "type": "string", "example": "juan@example.com" },
-                  "password": { "type": "string", "example": "123456" }
+                  "nombre": { "type": "string", "example": "Trasti Gonzalez" },
+                  "email": { "type": "string", "example": "trasti@example.com" },
+                  "password": { "type": "string", "example": "123456" },
+                  "type": { "type": "string", "example": "administrador"}
                 },
-                "required": ["nombre", "email", "password"]
+                "required": ["nombre", "email", "password", "type"]
               }
             }
           }
@@ -99,7 +100,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "email": { "type": "string", "example": "juan@example.com" },
+                  "email": { "type": "string", "example": "trasti@example.com" },
                   "password": { "type": "string", "example": "123456" }
                 },
                 "required": ["email", "password"]
@@ -134,9 +135,10 @@
                   "nombre": { "type": "string", "example": "Paracetamol" },
                   "descripcion": { "type": "string", "example": "Analgésico y antipirético" },
                   "precio": { "type": "number", "example": 4.99 },
+                  "stock": { "type": "integer", "example": 100 },
                   "categoria": { "type": "string", "example": "Medicamento" }
                 },
-                "required": ["nombre", "precio", "categoria"]
+                "required": ["nombre", "precio", "categoria", "stock"]
               }
             }
           }
