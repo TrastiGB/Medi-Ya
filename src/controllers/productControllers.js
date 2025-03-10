@@ -26,7 +26,7 @@ const getProductById = async (req, res) => {
 // Crear un producto (solo admin)
 const createProduct = async (req, res) => {
   try {
-    const { nombre, descripcion, precio, stock, imagen, categoria } = req.body;
+    const { nombre, descripcion, precio, stock = 100, imagen, categoria } = req.body;
     if (!nombre || !precio || !stock || !categoria)
       return res.status(400).json({ error: "Todos los campos obligatorios deben completarse" });
 
