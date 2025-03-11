@@ -11,4 +11,5 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  assetsInclude: ['**/*.jpg', '**/*.png'] // Permitir imágenes como assets
 })
