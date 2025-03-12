@@ -103,12 +103,12 @@
 </template>
 
 <script setup lang="ts">
-import categorycard from '@/components/categorycard.vue';
-import productcard from '@/components/productcard.vue';
-import medicinebottle from '@/components/medicinebottle.vue';
-import hygieneicon from '@/components/hygieneicon.vue';
-import cosmeticicon from '@/components/cosmeticicon.vue';
-import nutritionicon from '@/components/nutritionicon.vue';
+import categorycard from '@/components/Categorycard.vue';
+import productcard from '@/components/Productcard.vue';
+import medicinebottle from '@/components/Medicinebottle.vue';
+import hygieneicon from '@/components/Hygieneicon.vue';
+import cosmeticicon from '@/components/Cosmeticicon.vue';
+import nutritionicon from '@/components/Nutritionicon.vue';
 </script>
 
 <style scoped lang="scss">

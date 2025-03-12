@@ -27,8 +27,8 @@
   </header>
 </template>
 
-<script setup>
-import logocanvas from "@/components/logocanvas.vue";
+<script setup lang="ts">
+import logocanvas from "@/components/Logocanvas.vue";
 </script>
 
 <style scoped lang="scss">

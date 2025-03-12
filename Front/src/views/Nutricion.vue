@@ -58,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import productcard from '@/components/productcard.vue';
+import productcard from '@/components/Productcard.vue';
 import { ref } from 'vue';
 
 const categories = ref([
