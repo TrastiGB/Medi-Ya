@@ -1,30 +1,74 @@
 <template>
-    <div class="register">
-      <div class="register__container">
-        <h1 class="register__title">Crear Cuenta</h1>
-        <form class="register__form">
-          <div class="register__field" v-for="(campo, key) in form" :key="key">
-            <label :for="key" class="register__label">{{ campo.label }}</label>
-            <input :id="key" :type="campo.type" v-model="campo.value" :required="campo.required" class="register__input" />
-          </div>
-          <button type="submit" class="register__button">Registrarse</button>
-          <router-link to="/login" class="register__link">¿Ya tienes cuenta? Inicia sesión</router-link>
-        </form>
-      </div>
+  <div class="register">
+    <div class="register__container">
+      <h1 class="register__title">Crear Cuenta</h1>
+      <form @submit.prevent="registerUser" class="register__form">
+        <div class="register__field">
+          <label for="nombre" class="register__label">Nombre</label>
+          <input v-model="nombre" type="text" id="nombre" required class="register__input" />
+        </div>
+        <div class="register__field">
+          <label for="email" class="register__label">Correo Electrónico</label>
+          <input v-model="email" type="email" id="email" required class="register__input" />
+        </div>
+        <div class="register__field">
+          <label for="password" class="register__label">Contraseña</label>
+          <input v-model="password" type="password" id="password" required class="register__input" />
+        </div>
+        <button type="submit" class="register__button">Registrarse</button>
+        <router-link to="/login" class="register__link">¿Ya tienes cuenta? Inicia sesión</router-link>
+      </form>
+      <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+      <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
     </div>
+  </div>
 </template>
-  
+
 <script setup lang="ts">
 import { ref } from "vue";
+import { useUsuariosStore } from "@/stores/usuarios";
 
-const form = ref({
-  name: { label: "Nombre", type: "text", value: "", required: true },
-  surname: { label: "Apellidos", type: "text", value: "", required: true },
-  email: { label: "Correo Electrónico", type: "email", value: "", required: true },
-  password: { label: "Contraseña", type: "password", value: "", required: true },
-  confirmPassword: { label: "Confirmar Contraseña", type: "password", value: "", required: true }
-});
+const usuariosStore = useUsuariosStore();
+const nombre = ref("");
+const email = ref("");
+const password = ref("");
+const errorMessage = ref("");
+const successMessage = ref("");
+
+const registerUser = async () => {
+  errorMessage.value = "";
+  successMessage.value = "";
+
+  if (!nombre.value || !email.value || !password.value) {
+    errorMessage.value = "⚠️ Todos los campos son obligatorios.";
+    return;
+  }
+
+  try {
+    console.log("📩 Enviando datos al backend:", { nombre: nombre.value, email: email.value, password: password.value });
+
+    const response = await usuariosStore.registerUser({
+      nombre: nombre.value,
+      email: email.value,
+      password: password.value,
+    });
+
+    if (response && response.message) {
+      successMessage.value = "✅ Usuario registrado correctamente. ¡Ahora inicia sesión!";
+      nombre.value = "";
+      email.value = "";
+      password.value = "";
+    } else {
+      throw new Error("No se pudo registrar el usuario.");
+    }
+  } catch (error) {
+    errorMessage.value = "❌ Error al registrar usuario.";
+    console.error(error);
+  }
+};
 </script>
+
+
   
 <style scoped lang="scss">
 @use "@/assets/styles/_variables.scss" as *;

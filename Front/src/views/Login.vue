@@ -1,26 +1,68 @@
 <template>
   <div class="login">
-        <div class="login__container">
-            <h1 class="login__title">Iniciar Sesión</h1>
-            <form class="login__form">
-                <div class="login__field">
-                    <label for="email" class="login__label">Correo Electrónico</label>
-                    <input type="email" id="email" class="login__input" placeholder="Introduce tu correo" required>
-                </div>
-                <div class="login__field">
-                    <label for="password" class="login__label">Contraseña</label>
-                    <input type="password" id="password" class="login__input" placeholder="Introduce tu contraseña" required>
-                </div>
-                <button type="submit" class="login__button">Acceder</button>
-                <a href="#" class="login__link">¿Olvidaste tu contraseña?</a>
-                <router-link to="/register" class="login__link">Registrarse</router-link>
-            </form>
+    <div class="login__container">
+      <h1 class="login__title">Iniciar Sesión</h1>
+      <form @submit.prevent="loginUser" class="login__form">
+        <div class="login__field">
+          <label for="email" class="login__label">Correo Electrónico</label>
+          <input v-model="email" type="email" id="email" required class="login__input" />
         </div>
+        <div class="login__field">
+          <label for="password" class="login__label">Contraseña</label>
+          <input v-model="password" type="password" id="password" required class="login__input" />
+        </div>
+        <button type="submit" class="login__button">Acceder</button>
+        <router-link to="/register" class="login__link">Registrarse</router-link>
+      </form>
+      <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+      <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+import { useUsuariosStore } from "@/stores/usuarios";
+
+const usuariosStore = useUsuariosStore();
+const email = ref("");
+const password = ref("");
+const errorMessage = ref("");
+const successMessage = ref("");
+
+const loginUser = async () => {
+  errorMessage.value = "";
+  successMessage.value = "";
+
+  if (!email.value || !password.value) {
+    errorMessage.value = "⚠️ Todos los campos son obligatorios.";
+    return;
+  }
+
+  try {
+    console.log("📩 Enviando credenciales al backend:", { email: email.value, password: password.value });
+
+    const response = await usuariosStore.loginUser({
+      email: email.value,
+      password: password.value,
+    });
+
+    if (response && response.message) {
+      successMessage.value = "✅ Inicio de sesión exitoso. Redirigiendo...";
+      setTimeout(() => {
+        window.location.href = "/"; // Redirigir a home o dashboard
+      }, 2000);
+    } else {
+      throw new Error("Credenciales incorrectas.");
+    }
+  } catch (error) {
+    errorMessage.value = "❌ Usuario o contraseña incorrectos.";
+    console.error(error);
+  }
+};
 </script>
+
+
 
 <style scoped lang="scss">
 @use "@/assets/styles/_variables.scss" as *;
