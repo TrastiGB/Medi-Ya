@@ -18,75 +18,6 @@
         "responses": {
           "200": { "description": "Lista de usuarios" }
         }
-      },
-      "post": {
-        "summary": "Crear un usuario",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "nombre": { "type": "string", "example": "Juan Pérez" },
-                  "email": { "type": "string", "example": "juan@example.com" },
-                  "password": { "type": "string", "example": "123456" }
-                },
-                "required": ["nombre", "email", "password"]
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": { "description": "Usuario creado exitosamente" },
-          "400": { "description": "Error: Todos los campos son obligatorios" },
-          "409": { "description": "Error: El correo electrónico ya está registrado" }
-        }
-      }
-    },
-    "/api/usuarios/{id}": {
-      "get": {
-        "summary": "Obtener un usuario por ID",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": { "type": "integer" }
-          }
-        ],
-        "responses": {
-          "200": { "description": "Detalles del usuario" },
-          "404": { "description": "Usuario no encontrado" }
-        }
-      },
-      "put": {
-        "summary": "Actualizar un usuario",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": { "type": "integer" }
-          }
-        ],
-        "responses": {
-          "200": { "description": "Usuario actualizado correctamente" }
-        }
-      },
-      "delete": {
-        "summary": "Eliminar un usuario",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": { "type": "integer" }
-          }
-        ],
-        "responses": {
-          "200": { "description": "Usuario eliminado correctamente" }
-        }
       }
     },
     "/api/usuarios/login": {
@@ -99,8 +30,8 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "email": { "type": "string", "example": "juan@example.com" },
-                  "password": { "type": "string", "example": "123456" }
+                  "email": { "type": "string", "example": "admin@example.com" },
+                  "password": { "type": "string", "example": "admin123" }
                 },
                 "required": ["email", "password"]
               }

@@ -31,7 +31,8 @@ const getUserById = async (req, res) => {
 // Crear usuario
 const createUser = async (req, res) => {
   try {
-    const { nombre, email, password, tipo } = req.body;
+    const { nombre, email, password, tipo = "usuario" } = req.body;
+
     if (!nombre || !email || !password)
       return res.status(400).json({ error: "Todos los campos son obligatorios" });
 
@@ -50,6 +51,7 @@ const createUser = async (req, res) => {
     res.status(500).json({ error: "Error al crear el usuario" });
   }
 };
+
 
 
 // Actualizar usuario
