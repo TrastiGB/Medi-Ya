@@ -18,6 +18,11 @@
         "responses": {
           "200": { "description": "Lista de usuarios" }
         }
+      }
+    },
+    "/api/usuarios/login": {
+      "post": {
+        "summary": "Iniciar sesión",
       },
       "post": {
         "summary": "Crear un usuario",
@@ -28,6 +33,10 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "email": { "type": "string", "example": "admin@example.com" },
+                  "password": { "type": "string", "example": "admin123" }
+                },
+                "required": ["email", "password"]
                   "nombre": { "type": "string", "example": "Trasti Gonzalez" },
                   "email": { "type": "string", "example": "trasti@example.com" },
                   "password": { "type": "string", "example": "123456" },
@@ -39,6 +48,10 @@
           }
         },
         "responses": {
+          "200": { "description": "Inicio de sesión exitoso, devuelve cookie de sesión" },
+          "400": { "description": "Error: Todos los campos son obligatorios" },
+          "401": { "description": "Error: Contraseña incorrecta" },
+          "404": { "description": "Error: Usuario no encontrado" }
           "201": { "description": "Usuario creado exitosamente" },
           "400": { "description": "Error: Todos los campos son obligatorios" },
           "409": { "description": "Error: El correo electrónico ya está registrado" }
