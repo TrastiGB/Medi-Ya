@@ -23,6 +23,9 @@
     "/api/usuarios/login": {
       "post": {
         "summary": "Iniciar sesión",
+      },
+      "post": {
+        "summary": "Crear un usuario",
         "requestBody": {
           "required": true,
           "content": {
@@ -34,6 +37,12 @@
                   "password": { "type": "string", "example": "admin123" }
                 },
                 "required": ["email", "password"]
+                  "nombre": { "type": "string", "example": "Trasti Gonzalez" },
+                  "email": { "type": "string", "example": "trasti@example.com" },
+                  "password": { "type": "string", "example": "123456" },
+                  "type": { "type": "string", "example": "administrador" }
+                },
+                "required": ["nombre", "email", "password", "type"]
               }
             }
           }
@@ -43,6 +52,9 @@
           "400": { "description": "Error: Todos los campos son obligatorios" },
           "401": { "description": "Error: Contraseña incorrecta" },
           "404": { "description": "Error: Usuario no encontrado" }
+          "201": { "description": "Usuario creado exitosamente" },
+          "400": { "description": "Error: Todos los campos son obligatorios" },
+          "409": { "description": "Error: El correo electrónico ya está registrado" }
         }
       }
     },
@@ -65,9 +77,11 @@
                   "nombre": { "type": "string", "example": "Paracetamol" },
                   "descripcion": { "type": "string", "example": "Analgésico y antipirético" },
                   "precio": { "type": "number", "example": 4.99 },
-                  "categoria": { "type": "string", "example": "Medicamento" }
+                  "stock": { "type": "integer", "example": 100 },
+                  "categoria": { "type": "string", "example": "Medicamento" },
+                  "imagen": { "type": "string", "example": "ibuprofeno.jpg" }
                 },
-                "required": ["nombre", "precio", "categoria"]
+                "required": ["nombre", "precio", "categoria", "stock", "imagen"]
               }
             }
           }
