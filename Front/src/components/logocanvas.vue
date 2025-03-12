@@ -2,7 +2,8 @@
   <canvas ref="canvasElement" class="logo-canvas"></canvas>
 </template>
 
-<script setup>
+<script setup lang="ts">
+/*
 import { onMounted, ref, nextTick } from "vue";
 
 const canvasElement = ref(null);
@@ -51,6 +52,7 @@ onMounted(async () => {
 
   drawLogo();
 });
+*/
 </script>
 
 <style scoped>
