@@ -1,196 +1,127 @@
 <template>
-  <section class="categories">
-    <h2>Categorías principales</h2>
-    <div class="category-list">
+  <section class="home">
+    <h2 class="home__title">Categorías principales</h2>
+    <div class="home__categories">
       <categorycard 
-        name="Medicamentos"
-        link="/medicamentos"
-        bgColor="$secondary-color"
+        v-for="category in categories" 
+        :key="category.name"
+        :name="category.name"
+        :link="category.link"
+        :bgColor="category.bgColor"
       >
         <template #icon>
-          <medicinebottle />
-        </template>
-      </categorycard>
-
-      <categorycard 
-        name="Higiene"
-        link="/higiene"
-        bgColor="$background-color"
-      >
-        <template #icon>
-          <hygieneicon />
-        </template>
-      </categorycard>
-
-      <categorycard 
-        name="Cosmética"
-        link="/cosmetica"
-        bgColor="$primary-color"
-      >
-        <template #icon>
-          <cosmeticicon />
-        </template>
-      </categorycard>
-
-      <categorycard 
-        name="Nutrición y Dietética"
-        link="/nutricion"
-        bgColor="$color-border"
-      >
-        <template #icon>
-          <nutritionicon />
+          <component :is="category.icon" />
         </template>
       </categorycard>
     </div>
-  </section>
 
-  <section class="featured-products">
-    <h2>Productos Destacados</h2>
-    <div class="product-list">
+    <h2 class="home__title">Productos Destacados</h2>
+    <div class="home__products">
       <productcard 
-        name="Paracetamol 500mg"
-        price="5.99€"
-        image="@/assets/images/paracetamol.jpg"
-        class="product-card"
-      />
-      <productcard 
-        name="Crema Hidratante"
-        price="12.50€"
-        image="@/assets/images/crema.jpg"
-        class="product-card"
-      />
-      <productcard 
-        name="Vitaminas Complejo B"
-        price="8.99€"
-        image="@/assets/images/vitaminas.jpg"
-        class="product-card"
-      />
-      <productcard 
-        name="Paracetamol 500mg"
-        price="5.99€"
-        image="@/assets/images/paracetamol.jpg"
-        class="product-card"
-      />
-      <productcard 
-        name="Crema Hidratante"
-        price="12.50€"
-        image="@/assets/images/crema.jpg"
-        class="product-card"
-      />
-      <productcard 
-        name="Vitaminas Complejo B"
-        price="8.99€"
-        image="@/assets/images/vitaminas.jpg"
-        class="product-card"
+        v-for="product in products"
+        :key="product.id"
+        :name="product.name"
+        :price="product.price"
+        :image="product.image"
       />
     </div>
-  </section>
 
-  <section class="store-info">
-    <div class="container">
-      <h2>Sobre MEDIYA</h2>
-      <p>
-        En <strong>MEDIYA</strong> nos especializamos en ofrecer productos farmacéuticos de calidad, 
-        con un enfoque en el bienestar y la salud de nuestros clientes. Nuestro compromiso es 
-        brindar la mejor atención y un servicio confiable para garantizar tu satisfacción.
-      </p>
-      <p>
-        Descubre nuestra amplia selección de medicamentos, productos de higiene, cosmética y 
-        nutrición. ¡Tu bienestar es nuestra prioridad!
-      </p>
-    </div>
+    <section class="home__info">
+      <div class="home__info-container">
+        <h2 class="home__info-title">Sobre MEDIYA</h2>
+        <p class="home__info-text">
+          En <strong>MEDIYA</strong> nos especializamos en ofrecer productos farmacéuticos de calidad,
+          con un enfoque en la salud y el bienestar de nuestros clientes.
+        </p>
+      </div>
+    </section>
   </section>
 </template>
 
 <script setup lang="ts">
-import categorycard from '@/components/Categorycard.vue';
-import productcard from '@/components/Productcard.vue';
-import medicinebottle from '@/components/Medicinebottle.vue';
-import hygieneicon from '@/components/Hygieneicon.vue';
-import cosmeticicon from '@/components/Cosmeticicon.vue';
-import nutritionicon from '@/components/Nutritionicon.vue';
+import categorycard from "@/components/categorycard.vue";
+import productcard from "@/components/productcard.vue";
+import medicinebottle from "@/components/medicinebottle.vue";
+import hygieneicon from "@/components/hygieneicon.vue";
+import cosmeticicon from "@/components/cosmeticicon.vue";
+import nutritionicon from "@/components/nutritionicon.vue";
+import { ref } from "vue";
+
+const categories = ref([
+  { name: "Medicamentos", link: "/medicamentos", bgColor: "#A5D6A7", icon: medicinebottle },
+  { name: "Higiene", link: "/higiene", bgColor: "#C5E1A5", icon: hygieneicon },
+  { name: "Cosmética", link: "/cosmetica", bgColor: "#81C784", icon: cosmeticicon },
+  { name: "Nutrición y Dietética", link: "/nutricion", bgColor: "#66BB6A", icon: nutritionicon }
+]);
+
+const products = ref([
+  { id: 1, name: "Paracetamol 500mg", price: "5.99€", image: "@/assets/images/paracetamol.jpg" },
+  { id: 2, name: "Crema Hidratante", price: "12.50€", image: "@/assets/images/crema.jpg" },
+  { id: 3, name: "Vitaminas Complejo B", price: "8.99€", image: "@/assets/images/vitaminas.jpg" },
+]);
 </script>
 
 <style scoped lang="scss">
 @use "@/assets/styles/_variables.scss" as *;
 @use "@/assets/styles/_mixins.scss" as *;
 
-.categories, .store-info, .featured-products {
-    text-align: center;
-    padding: 30px 0;
-  
-    h2 {
-      font-size: $title-medium;
-      font-weight: bold;
-      margin-bottom: 20px;
-      color: $primary-color;
-    }
-}
+.home {
+  text-align: center;
+  padding: $padding-medium;
 
-.category-list {
-    @include flex-center(row, center, center);
+  &__title {
+    font-size: $title-medium;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: $primary-color;
+  }
+
+  &__categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
-}
+  }
 
-.product-list {
+  &__products {
     display: grid;
-    grid-template-columns: 100%; // Mobile: una sola columna
-    grid-template-areas: 
-        "product1"
-        "product2"
-        "product3"
-        "product4"
-        "product5"
-        "product6";
+    grid-template-columns: 1fr;
     gap: 20px;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    justify-content: center;
 
-    @media (min-width: 768px) { // Tablets: Dos columnas
-        grid-template-columns: 48% 48%;
-        grid-template-areas: 
-            "product1 product2"
-            "product3 product4"
-            "product5 product6";
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
     }
 
-    @media (min-width: 1024px) { // Escritorio: Tres columnas
-        grid-template-columns: 30% 30% 30%;
-        grid-template-areas: 
-            "product1 product2 product3"
-            "product4 product5 product6";
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
     }
+  }
 
-    .product-card:nth-child(1) { grid-area: product1; }
-    .product-card:nth-child(2) { grid-area: product2; }
-    .product-card:nth-child(3) { grid-area: product3; }
-    .product-card:nth-child(4) { grid-area: product4; }
-    .product-card:nth-child(5) { grid-area: product5; }
-    .product-card:nth-child(6) { grid-area: product6; }
-}
-
-.store-info {
+  &__info {
     background-color: $background-color;
     padding: 40px 20px;
+    margin-top: 40px;
 
-    .container {
+    &-container {
       max-width: 800px;
       margin: 0 auto;
       text-align: center;
     }
 
-    p {
+    &-title {
+      font-size: $title-medium;
+      color: $primary-color;
+      margin-bottom: 10px;
+    }
+
+    &-text {
       font-size: $text-medium;
       color: $color-text-light;
-      margin-bottom: 15px;
       line-height: 1.6;
     }
-}
-
-.featured-products {
-    background-color: $color-white;
-    padding: 40px 20px;
+  }
 }
 </style>

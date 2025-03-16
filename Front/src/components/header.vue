@@ -1,34 +1,33 @@
 <template>
   <header class="header">
-    <div class="container">
-      <div class="logo">
-        <router-link to="/" class="logo__link">
+    <div class="header__container">
+      <div class="header__logo">
+        <router-link to="/" class="header__logo-link">
           <logocanvas />
           <div>
-            <h1>MediYa</h1>
-            <span>Somos farmacéuticos</span>
+            <h1 class="header__title">MediYa</h1>
+            <span class="header__subtitle">Somos farmacéuticos</span>
           </div>
         </router-link>
       </div>
-      <nav class="nav">
-        <ul>
-          <li><router-link to="/">Categorías</router-link></li>
-          <li><router-link to="/medicamentos">Medicamentos</router-link></li>
-          <li><router-link to="/novedades">Novedades</router-link></li>
-          <li><router-link to="/oportunidades">Oportunidades</router-link></li>
-          <li><router-link to="/blog">Blog</router-link></li>
+      <nav class="header__nav">
+        <ul class="header__nav-list">
+          <li class="header__nav-item"><router-link to="/">Categorías</router-link></li>
+          <li class="header__nav-item"><router-link to="/medicamentos">Medicamentos</router-link></li>
+          <li class="header__nav-item"><router-link to="/oportunidades">Oportunidades</router-link></li>
+          <li class="header__nav-item"><router-link to="/blog">Blog</router-link></li>
         </ul>
       </nav>
-      <div class="actions">
-        <router-link to="/login" class="login">Iniciar sesión</router-link>
-        <button class="cart"></button>
+      <div class="header__actions">
+        <router-link to="/login" class="header__login">Iniciar sesión</router-link>
+        <button class="header__cart"></button>
       </div>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
-import logocanvas from "@/components/Logocanvas.vue";
+import logocanvas from "@/components/logocanvas.vue";
 </script>
 
 <style scoped lang="scss">
@@ -37,80 +36,82 @@ import logocanvas from "@/components/Logocanvas.vue";
 
 .header {
   background-color: $color-white;
-  padding: 15px 0;
+  padding: 10px 0;
   @include box-shadow;
 
-  .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    @include flex-center(row, space-between, center);
+  &__container {
+    @include container;
+    @include flex-center(column);
+    
+    @media (min-width: $breakpoint-tablet) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
   }
 
-  .logo {
-    @include flex-center(row, flex-start, center);
+  &__logo {
+    display: flex;
+    align-items: center;
     gap: 10px;
-
-    &__link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    h1 {
-      font-size: $title-large;
-      font-weight: bold;
-      color: $color-text-dark;
-      margin: 0;
-    }
-
-    span {
-      font-size: $text-small;
-      color: $color-text-light;
-    }
   }
 
-  .nav {
-    ul {
-      list-style: none;
-      display: flex;
+  &__logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &__title {
+    font-size: $title-medium;
+    font-weight: bold;
+    color: $color-text-dark;
+  }
+
+  &__subtitle {
+    font-size: $text-small;
+    color: $color-text-light;
+  }
+
+  &__nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+    padding: 0;
+
+    @media (min-width: $breakpoint-tablet) {
+      flex-direction: row;
       gap: 20px;
-      padding: 0;
-      margin: 0;
-      flex-grow: 1;
-
-      li {
-        a {
-          text-decoration: none;
-          font-size: $text-medium;
-          color: $color-text-dark;
-          transition: color 0.3s ease;
-
-          &:hover {
-            color: $primary-color;
-          }
-        }
-      }
     }
   }
 
-  .actions {
-    @include flex-center(row, flex-start, center);
-    gap: 15px;
+  &__nav-item a {
+    text-decoration: none;
+    font-size: $text-medium;
+    color: $color-text-dark;
+    transition: color 0.3s ease;
 
-    .login {
-      @include button-style($primary-color, $color-white);
+    &:hover {
+      color: $primary-color;
     }
+  }
 
-    .cart {
-      width: 30px;
-      height: 30px;
-      background-size: cover;
-      border: none;
-      cursor: pointer;
-    }
+  &__actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__login {
+    @include button-style($primary-color, $color-white);
+  }
+
+  &__cart {
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
   }
 }
 </style>

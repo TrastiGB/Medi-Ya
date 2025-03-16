@@ -18,8 +18,8 @@
         <button type="submit" class="register__button">Registrarse</button>
         <router-link to="/login" class="register__link">¿Ya tienes cuenta? Inicia sesión</router-link>
       </form>
-      <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
-      <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
+      <p v-if="errorMessage" class="register__message register__message--error">{{ errorMessage }}</p>
+      <p v-if="successMessage" class="register__message register__message--success">{{ successMessage }}</p>
     </div>
   </div>
 </template>
@@ -40,13 +40,11 @@ const registerUser = async () => {
   successMessage.value = "";
 
   if (!nombre.value || !email.value || !password.value) {
-    errorMessage.value = "⚠️ Todos los campos son obligatorios.";
+    errorMessage.value = "Todos los campos son obligatorios.";
     return;
   }
 
   try {
-    console.log("📩 Enviando datos al backend:", { nombre: nombre.value, email: email.value, password: password.value });
-
     const response = await usuariosStore.registerUser({
       nombre: nombre.value,
       email: email.value,
@@ -54,7 +52,7 @@ const registerUser = async () => {
     });
 
     if (response && response.message) {
-      successMessage.value = "✅ Usuario registrado correctamente. ¡Ahora inicia sesión!";
+      successMessage.value = response.message;
       nombre.value = "";
       email.value = "";
       password.value = "";
@@ -62,14 +60,12 @@ const registerUser = async () => {
       throw new Error("No se pudo registrar el usuario.");
     }
   } catch (error) {
-    errorMessage.value = "❌ Error al registrar usuario.";
-    console.error(error);
+    errorMessage.value = error.message || "Error al registrar usuario.";
+    console.error("Error durante el registro:", error);
   }
 };
 </script>
 
-
-  
 <style scoped lang="scss">
 @use "@/assets/styles/_variables.scss" as *;
 @use "@/assets/styles/_mixins.scss" as *;
@@ -84,7 +80,7 @@ const registerUser = async () => {
     padding: 32px;
     border-radius: $border-radius;
     @include box-shadow;
-    width: 100%;
+    width: 90%;
     max-width: 400px;
     text-align: center;
   }
@@ -139,6 +135,17 @@ const registerUser = async () => {
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  &__message {
+    margin-top: 10px;
+    font-size: $text-small;
+    &--error {
+      color: red;
+    }
+    &--success {
+      color: green;
     }
   }
 }

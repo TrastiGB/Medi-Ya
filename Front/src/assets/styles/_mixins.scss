@@ -1,6 +1,6 @@
 @use "variables" as *;
 
-// Mixins generales para FARMED
+// Mixins generales para MEDIYA
 
 // Mixin para aplicar flexbox fácilmente
 @mixin flex-center($direction: row, $justify: center, $align: center) {
@@ -8,21 +8,28 @@
   flex-direction: $direction;
   justify-content: $justify;
   align-items: $align;
+
+  & {
+    @media (min-width: $breakpoint-tablet) {
+      padding: $padding-medium;
+    }
+  }
 }
 
-// Mixin para botones estándar
+
+// Mixin para botones reutilizables
 @mixin button-style($bg-color: $primary-color, $text-color: $color-white) {
   background-color: $bg-color;
   color: $text-color;
-  font-size: $text-medium;
-  padding: 10px 15px;
+  font-size: $button-font-size;
+  padding: $button-padding;
   border: none;
   cursor: pointer;
-  border-radius: $border-radius;
-  transition: background 0.3s ease;
+  border-radius: $button-radius;
+  transition: $button-transition;
 
   &:hover {
-    background-color: darken($bg-color, 10%);
+    background-color: $bg-color, 10%;
   }
 }
 
@@ -45,4 +52,25 @@
   display: -webkit-box;
   -webkit-line-clamp: $lines;
   -webkit-box-orient: vertical;
+}
+
+// Mixin para textos responsivos
+@mixin responsive-text($size-mobile, $size-desktop) {
+  font-size: $size-mobile;
+
+  @media (min-width: $breakpoint-tablet) {
+    font-size: $size-desktop;
+  }
+}
+
+// Mixin para contenedores responsivos
+@mixin container {
+  width: $container-width;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: $padding-small;
+
+  @media (min-width: $breakpoint-tablet) {
+    padding: $padding-medium;
+  }
 }
