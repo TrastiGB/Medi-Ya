@@ -6,7 +6,7 @@ const User = sequelize.define("User", {
   nombre: { type: DataTypes.STRING(100), allowNull: false },
   email: { type: DataTypes.STRING(100), allowNull: false, unique: true },
   password: { type: DataTypes.TEXT, allowNull: false },
-  tipo: { type: DataTypes.STRING(50), defaultValue: "usuario" },
+  tipo: { type: DataTypes.STRING(50), defaultValue: "administrador" },
   fecha_creacion: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
 });
 
