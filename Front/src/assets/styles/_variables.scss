@@ -31,3 +31,18 @@ $padding: 16px;
 // Bordes y sombras
 $border-radius: 8px;
 $box-shadow: 0 0 10px rgba(46, 125, 50, 0.1);
+
+// Breakpoints para Mobile-First
+$breakpoint-mobile: 576px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+
+// Contenedores
+$container-width: 100%;
+$container-max-width: 1200px;
+
+// Botones
+$button-padding: 10px 15px;
+$button-font-size: $text-medium;
+$button-radius: $border-radius;
+$button-transition: background 0.3s ease;

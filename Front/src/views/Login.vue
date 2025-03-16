@@ -14,8 +14,8 @@
         <button type="submit" class="login__button">Acceder</button>
         <router-link to="/register" class="login__link">Registrarse</router-link>
       </form>
-      <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
-      <p v-if="successMessage" class="success-message">{{ successMessage }}</p>
+      <p v-if="errorMessage" class="login__message login__message--error">{{ errorMessage }}</p>
+      <p v-if="successMessage" class="login__message login__message--success">{{ successMessage }}</p>
     </div>
   </div>
 </template>
@@ -35,34 +35,30 @@ const loginUser = async () => {
   successMessage.value = "";
 
   if (!email.value || !password.value) {
-    errorMessage.value = "⚠️ Todos los campos son obligatorios.";
+    errorMessage.value = "Todos los campos son obligatorios.";
     return;
   }
 
   try {
-    console.log("📩 Enviando credenciales al backend:", { email: email.value, password: password.value });
-
     const response = await usuariosStore.loginUser({
       email: email.value,
       password: password.value,
     });
 
     if (response && response.message) {
-      successMessage.value = "✅ Inicio de sesión exitoso. Redirigiendo...";
+      successMessage.value = "Inicio de sesión exitoso. Redirigiendo...";
       setTimeout(() => {
-        window.location.href = "/"; // Redirigir a home o dashboard
+        window.location.href = "/";
       }, 2000);
     } else {
       throw new Error("Credenciales incorrectas.");
     }
   } catch (error) {
-    errorMessage.value = "❌ Usuario o contraseña incorrectos.";
-    console.error(error);
+    errorMessage.value = "Usuario o contraseña incorrectos.";
+    console.error("Error durante el inicio de sesión:", error);
   }
 };
 </script>
-
-
 
 <style scoped lang="scss">
 @use "@/assets/styles/_variables.scss" as *;
@@ -136,6 +132,17 @@ const loginUser = async () => {
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  &__message {
+    margin-top: 10px;
+    font-size: $text-small;
+    &--error {
+      color: red;
+    }
+    &--success {
+      color: green;
     }
   }
 }

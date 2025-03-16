@@ -24,22 +24,26 @@ export const useUsuariosStore = defineStore("usuarios", {
 
         this.usuarios = await response.json();
       } catch (error) {
-        console.error("❌ Error al obtener usuarios:", error);
+        console.error("Error al obtener usuarios:", error);
       }
     },
 
     async registerUser(userData: User) {
       try {
-        const response = await fetch("http://localhost:5000/api/usuarios", {
+        const response = await fetch("http://localhost:5000/api/usuarios/registro", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(userData),
         });
 
-        if (!response.ok) throw new Error("Error al registrar usuario");
-        return await response.json();
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Error al registrar usuario");
+
+        return data;
       } catch (error) {
-        console.error("❌ Error al registrar usuario:", error);
+        const errorMessage = error instanceof Error ? error.message : "Error desconocido";
+        console.error("Error al registrar usuario:", errorMessage);
+        throw new Error(errorMessage);  
       }
     },
 
@@ -55,7 +59,7 @@ export const useUsuariosStore = defineStore("usuarios", {
         this.usuarioActual = await response.json();
         return this.usuarioActual;
       } catch (error) {
-        console.error("❌ Error en el login:", error);
+        console.error("Error en el proceso de login:", error);
       }
     },
 
@@ -64,7 +68,7 @@ export const useUsuariosStore = defineStore("usuarios", {
         await fetch("http://localhost:5000/api/usuarios/logout", { method: "POST" });
         this.usuarioActual = null;
       } catch (error) {
-        console.error("❌ Error al cerrar sesión:", error);
+        console.error("Error al cerrar sesión:", error);
       }
     },
   },
