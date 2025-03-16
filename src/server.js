@@ -17,11 +17,16 @@ const { seedProducts } = require("./database/seedProducts");
 const app = express();
 
 // **Middlewares**
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Cambia por la URL del frontend si es necesario
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // **Middleware para servir imágenes correctamente**
-app.use("/uploads", express.static(path.join(__dirname, "uploads"))); 
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const session = require("express-session");
 
@@ -43,7 +48,7 @@ connectDB();
 
 // **Sincronizar modelos con la base de datos y cargar productos de prueba**
 sequelize
-  .sync({ force: false })
+  .sync({ force: false }) // Asegúrate de que force sea false para no perder datos en cada reinicio
   .then(async () => {
     console.log("✅ Base de datos sincronizada.");
     const productCount = await sequelize.models.Product.count();
@@ -63,7 +68,7 @@ sequelize
 app.use("/api/usuarios", userRoutes);
 app.use("/api/productos", productRoutes);
 app.use("/api/pedidos", orderRoutes);
-  
+
 // **Ruta de prueba**
 app.get("/", (req, res) => {
   res.send("Bienvenido a la API de MEDIYA");
