@@ -1,0 +1,39 @@
+@use "_variables.scss" as *;
+@use "_mixins.scss" as *;
+
+/* Estilos globales */
+body {
+  font-family: $font-family;
+  margin: 0;
+  padding: 0;
+  background-color: $background-color;
+  font-size: $text-medium;
+  color: $color-text-dark;
+
+  @media (min-width: $breakpoint-tablet) {
+    font-size: $text-large;
+  }
+}
+
+/* Contenedor principal */
+.container {
+  @include container;
+}
+
+/* Botones */
+.button {
+  @include button-style;
+
+  &--primary {
+    @include button-style($primary-color);
+  }
+
+  &--secondary {
+    @include button-style($secondary-color);
+  }
+}
+
+/* Imágenes responsivas */
+.img-responsive {
+  @include responsive-img;
+}
