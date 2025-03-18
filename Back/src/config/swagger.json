@@ -1,0 +1,193 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Mediya API",
+    "version": "1.0.0",
+    "description": "API para el servicio de delivery de farmacias"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Servidor Local"
+    }
+  ],
+  "paths": {
+    "/api/usuarios": {
+      "get": {
+        "summary": "Obtener todos los usuarios",
+        "responses": {
+          "200": { "description": "Lista de usuarios" }
+        }
+      }
+    },
+    "/api/usuarios/login": {
+      "post": {
+        "summary": "Iniciar sesión",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string", "example": "trasti@example.com" },
+                  "password": { "type": "string", "example": "123456" }
+                },
+                "required": ["email", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Inicio de sesión exitoso, devuelve cookie de sesión" },
+          "400": { "description": "Error: Todos los campos son obligatorios" },
+          "401": { "description": "Error: Contraseña incorrecta" },
+          "404": { "description": "Error: Usuario no encontrado" }
+        }
+      }
+    },
+    "/api/usuarios/registro": {
+      "post": {
+        "summary": "Crear un usuario",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": { "type": "string", "example": "Trasti Gonzalez" },
+                  "email": { "type": "string", "example": "trasti@example.com" },
+                  "password": { "type": "string", "example": "123456" },
+                  "type": { "type": "string", "example": "administrador" }
+                },
+                "required": ["nombre", "email", "password", "type"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Usuario creado exitosamente" },
+          "400": { "description": "Error: Todos los campos son obligatorios" },
+          "409": { "description": "Error: El correo electrónico ya está registrado" }
+        }
+      }
+    },
+    "/api/productos": {
+      "get": {
+        "summary": "Obtener todos los productos",
+        "responses": {
+          "200": { "description": "Lista de productos" }
+        }
+      },
+      "post": {
+        "summary": "Crear un producto",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": { "type": "string", "example": "Paracetamol" },
+                  "descripcion": { "type": "string", "example": "Analgésico y antipirético" },
+                  "precio": { "type": "number", "example": 4.99 },
+                  "stock": { "type": "integer", "example": 100 },
+                  "categoria": { "type": "string", "example": "Medicamento" },
+                  "imagen": { "type": "string", "example": "ibuprofeno.jpg" }
+                },
+                "required": ["nombre", "precio", "categoria", "stock", "imagen"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Producto creado exitosamente" },
+          "400": { "description": "Error: Todos los campos obligatorios deben estar completos" }
+        }
+      }
+    },
+    "/api/productos/{id}": {
+      "get": {
+        "summary": "Obtener un producto por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Detalles del producto" },
+          "404": { "description": "Producto no encontrado" }
+        }
+      },
+      "put": {
+        "summary": "Actualizar un producto",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Producto actualizado correctamente" }
+        }
+      },
+      "delete": {
+        "summary": "Eliminar un producto",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Producto eliminado correctamente" }
+        }
+      }
+    },
+    "/api/productos/{id}/reviews": {
+      "get": {
+        "summary": "Obtener reseñas de un producto",
+        "tags": ["Reseñas"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "responses": {
+          "200": { "description": "Lista de reseñas" }
+        }
+      },
+      "post": {
+        "summary": "Agregar una reseña a un producto",
+        "tags": ["Reseñas"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "comentario": { "type": "string" },
+                  "calificacion": { "type": "integer", "minimum": 1, "maximum": 5 }
+                },
+                "required": ["comentario", "calificacion"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Reseña agregada" }
+        }
+      }
+    }
+  }
+}
